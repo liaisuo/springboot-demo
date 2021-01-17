@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatisplusdemo.dao.UserMapper">
+    <select id="findUserListPage" parameterType="com.example.mybatisplusdemo.entity.UserParams"
+            resultType="com.example.mybatisplusdemo.entity.User">
+        SELECT id,user_name,age,create_time,flag,version
+         FROM user
+        WHERE flag=0
+        <if test="userParams.userName!=null and userParams.userName!=''">
+          AND user_name like concat('%',#{userParams.userName},'%')
+        </if>
+        ORDER BY age ASC
+    </select>
+</mapper>
